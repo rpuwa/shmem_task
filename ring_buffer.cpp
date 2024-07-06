@@ -1,13 +1,10 @@
 #include "ring_buffer.h"
 
-#include <ctime>
-#include <iostream>
-
 bool ring_buffer::write(std::timespec &item) {
-    if (full_) {
+    if (full()) {
         return false;
     }
-    int next_head = head_ + 1;
+    size_t next_head = head_ + 1;
     if (next_head == capacity()) {
         next_head = 0;
     }
@@ -23,7 +20,7 @@ bool ring_buffer::read(std::timespec &res) {
     if (empty()) {
         return false;
     }
-    int next_tail = tail_ + 1;
+    size_t next_tail = tail_ + 1;
     if (next_tail == capacity()) {
         next_tail = 0;
     }

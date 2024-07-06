@@ -1,8 +1,7 @@
 #pragma once
 
+#include <atomic>
 #include <ctime>
-#include <memory>
-#include <mutex>
 
 // ring_buffer size will fit into 2KB
 #define RING_BUF_SIZE 126
@@ -26,9 +25,9 @@ public:
 
 private:
     std::timespec buf_[RING_BUF_SIZE];
-    size_t head_ = 0;
-    size_t tail_ = 0;
-    bool full_ = false;
+    std::atomic<size_t> head_ = 0;
+    std::atomic<size_t> tail_ = 0;
+    std::atomic<bool> full_ = false;
 
     static size_t capacity() {
         return RING_BUF_SIZE;

@@ -7,7 +7,7 @@
 #include "ring_buffer.h"
 
 uint32_t diff_timespec(std::timespec const& t1, std::timespec const& t2) {
-    return (t2.tv_sec - t1.tv_sec) * 1e9 + (t2.tv_nsec - t1.tv_nsec);
+    return (t2.tv_sec - t1.tv_sec) * 1'000'000'000 + (t2.tv_nsec - t1.tv_nsec);
 }
 
 int main() {
